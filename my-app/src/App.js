@@ -1,56 +1,20 @@
-import logo from './logo.svg';
+
 import './App.css';
-function Header(props) {
-  return <header>
-  <h1><a href='/' onClick={function(event) {
-    event.preventDefault();
-    props.onChangeMode();
-  }}>{props.title}</a></h1>
-    </header>
-}
+import styles from "./App.module.css"
+import Hello from './component/Hello';
+import Welcome from './component/Welcome';
+import World from './component/World';
 
-function Nav(props) {
-  const lis = []
-  for (let i = 0; i < props.topics.length; i++) {
-    let t = props.topics[i];
-    lis.push(<li key={t.id}><a id={t.id} href={'/read/'+t.id} onClick={function(event){
-      event.preventDefault();
-      props.onChangeMode(event.target.id);
-    }}>{t.title}</a></li>);
-   
-  }
-    
-  return <nav>
-  <ol>
-    {lis}
-  </ol>
-</nav>
-}
-function Article(props) {
-  return <article>
-  <h2>{props.title}</h2>
-
-  {props.body}
-</article>
-}
+//component는 다른곳에서 js를 만든후 import해서 사용가능
+//css 적용: 1. 인라인 스타일 style값은 객체속성으로  속성값은 카멜케이스로
+//css 모듈화 import styles from "./Hello.module.css"
 function App() {
-  const topics = [
-    {id:1, title:'html', body:'html is...'},
-    {id:2, title:'css', body:'css is...'},
-    {id:3, title:'javascript', body:'javascript is...'}
-  ]
-  return (
-    <div>
-      <Header title='REACT' onChangeMode={function() {
-        alert('Header');
-      }}></Header>
-      <Nav topics={topics} onChangeMode={function(id){
-        alert(id);
-      }}></Nav>
-      <Article title='Welcome' body='Hello, WEB'></Article>
-      
-    </div>
-  );
+  return <div>
+    <Hello></Hello>
+    <div className={styles.box}>App</div>
+    
+   
+  </div>;
 }
 
 export default App;
