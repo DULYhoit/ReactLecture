@@ -1,6 +1,7 @@
 
 import { Link } from 'react-router-dom';
 const Header = () => {
+    
     return (
         <div className="header">
             <h1>
@@ -10,12 +11,13 @@ const Header = () => {
             </h1>
                 
             <div className="menu">
-                <a href="#x" className="link">
+                <Link to="/create_word" className='link'>
                     단어추가
-                </a>
-                <a href="#x" className="link">
-                    Day 추가
-                </a>
+                </Link>
+                
+                <Link to="/create_day" className='link'>
+                Day 추가
+                </Link>
             </div>
 
         </div>
