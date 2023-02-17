@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+# React 무엇?
+1. React는 웹 프레임워크로, 자바스크립트 라이브러리의 하나로서 사용자 인터페이스를 만들기 위해 사용된다.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# React의 특징
+1. Data Flow
+2. Component 기반 구조
+3. Virtual Dom
+4. Props and State
+5. JSX
+---
+ 1. Data Flow : React는 데이터의 흐름이 한 방향으로만 흐르는 단방향 데이터 흐름을 가집니다.
 
-## Available Scripts
+ 2. Component 기반 구조 :
+Component는 독립적인 단위의 소프트웨어 모듈을 말합니다.
+즉, 소프트웨어를 독립적인 하나의 부품으로 만드는 방법이라고 볼 수 있습니다.
+```javascript
+class App extends Component {
+  render() {
+    return (
+      <Layout>
+        <Header />
+        <Navigation />
+        <Content>
+          <Sidebar></Sidebar>
+          <Router />
+        </Content>
+        <Footer></Footer>
+      </Layout>
+    );
+  }
+}
+ ```
+3. Virtual DOM :
+먼저, DOM은 Document Object Model의 약자입니다.
+DOM은 html, xml, CSS 등을 트리 구조로 인식하고, 데이터를 객체로 간주하고 관리합니다.
 
-In the project directory, you can run:
+4. Props and State :
+## Props
+Props란 부모 컴포넌트에서 자식 컴포넌트로 전달해 주는 데이터를 말합니다.
+쉽게 읽기 전용 데이터라고 생각하면 될 것 같습니다! 자식 컴포넌트에서 전달받은 props는 변경이 불가능하고 props를 전달해준 최상위 부모 컴포넌트만 props를 변경할 수 있습니다.
 
-### `npm start`
+## State
+State는 컴포넌트 내부에서 선언하며 내부에서 값을 변경할 수 있습니다. state는 동적인 데이터를 다룰 때 사용하며, 사용자와의 상호작용을 통해 데이터를 동적으로 변경할 때 사용합니다. 클래스형 컴포넌트에서만 사용할 수 있고, 각각의 state는 독립적입니다.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+5. JSX
+React에서 JSX 사용이 필수는 아니지만, React에서 사용되기 때문에 공식문서의 설명을 첨부해 간단히 정리해 보았습니다!
