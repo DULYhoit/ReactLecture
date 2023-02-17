@@ -14,9 +14,7 @@ const DayList = () => {
         <ul className='list_day'>
             {days.map(day_ => (
                 <li key={day_.id}>
-                    <Link to={`/day/${day_.day}`} onClick={() => {
-
-                    }}>
+                    <Link to={`/day/${day_.day}`}>
                         Day {day_.day}
                     </Link>
                 </li>
