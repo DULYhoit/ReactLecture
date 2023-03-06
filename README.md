@@ -44,3 +44,6 @@ State는 컴포넌트 내부에서 선언하며 내부에서 값을 변경할 �
 
 5. JSX
 React에서 JSX 사용이 필수는 아니지만, React에서 사용되기 때문에 공식문서의 설명을 첨부해 간단히 정리해 보았습니다!
+
+# SetUp
+1. npx create-react-app 프로젝트명
