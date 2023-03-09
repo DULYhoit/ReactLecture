@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react";
-import { InputGroup, Form, Button } from "react-bootstrap";
+import { InputGroup, Form, Button, Nav, } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import Navbar from "../component/Navbar"
+import Tabcontent from "./Tabcontent";
 
 const Detail = (props) => {
   let { id } = useParams();
   let [alertdiscount, setAlertdiscount] = useState(true);
-  let [num,setNum] = useState('');
+  let [num, setNum] = useState("");
+  let [tab,setTab] = useState(0);
+  let [fade,setFade] = useState('');
+
   useEffect(() => {
     //어려운연산
     //서버에서 데이터가져오는 작업
@@ -19,20 +24,29 @@ const Detail = (props) => {
     };
   });
 
-  useEffect(()=>{
-    
-    if(isNaN(num) == true){
-      alert('숫자가아닙니다.')
-      document.querySelector('.count-btn').value = null;
-      
-    console.log('숫자가아닙니다');
-  }
- 
-},[num])
-    
+  useEffect(() => {
+    if (isNaN(num) == true) {
+      alert("숫자가아닙니다.");
+      document.querySelector(".count-btn").value = "";
 
+      console.log("숫자가아닙니다");
+    }
+  }, [num]);
+
+  useEffect(()=>{
+    //리엑트 18버전 이후에 추가된 automatic batching 기능
+    //스테이트 변경한 함수들이 근처에있으면 하나로 합쳐서 한번만 바꿔줌
+    //스테이트 변경이 마지막으로 끝나면 재렌더링
+    //결론은 return이 먼저실행되고 setFade('end')가 실행
+    setTimeout(() => {
+      setFade('end');
+    }, 10);
     
-    
+    return()=>{
+      setFade(''); 
+    }
+
+  },[tab])
 
   if (id != props.shoes.length) {
     var finding = props.shoes.find(function (x) {
@@ -52,24 +66,30 @@ const Detail = (props) => {
           <div className="col-md-6">
             <img src={url} width="100%" />
           </div>
-          <InputGroup className="mb-3">
-            <Form.Control
-              placeholder="Recipient's username"
-              aria-label="Recipient's username"
-              aria-describedby="basic-addon2"
-           onChange={(e) => {setNum(e.target.value)}} className='count-btn'/>
-            <Button variant="outline-secondary" id="button-addon2">
-              Button
-            </Button>
-          </InputGroup>
 
           <div className="col-md-6">
             <h4 className="pt-5">{props.shoes[finding.id].title}</h4>
             <p>{props.shoes[finding.id].content}</p>
             <p>{props.shoes[finding.id].price}원</p>
+            <InputGroup
+              className="mb-3 buy-count"
+              style={{ width: "300px", margin: "0 auto" }}
+            >
+              <Form.Control
+                placeholder="수량"
+                aria-label="수량"
+                aria-describedby="basic-addon2"
+                onChange={(e) => {
+                  setNum(e.target.value);
+                }}
+                className="count-btn"
+              />
+            </InputGroup>
             <button className="btn btn-danger">주문하기</button>
           </div>
         </div>
+        <Navbar setTab={setTab}></Navbar>
+        <Tabcontent tab={tab} fade={fade}></Tabcontent>
       </div>
     );
   } else {
