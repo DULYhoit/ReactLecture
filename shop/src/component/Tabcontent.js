@@ -1,4 +1,6 @@
-const Tabcontent = ({ tab ,fade}) => {
+
+
+const Tabcontent = ({tab ,fade}) => {
   return (
     <div className={'start '+fade}>
       {

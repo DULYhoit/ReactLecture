@@ -43,3 +43,8 @@ code {
   opacity: 1;
   transition: all 0.5s;
 }
+
+.cart-table thead{
+  
+   border-bottom: 2px solid black;
+}

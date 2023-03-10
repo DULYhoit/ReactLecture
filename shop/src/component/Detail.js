@@ -1,8 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { InputGroup, Form, Button, Nav, } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import Navbar from "../component/Navbar"
 import Tabcontent from "./Tabcontent";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser,setAge} from "../redux/store";
+import { gocart } from "../redux/store";
 
 const Detail = (props) => {
   let { id } = useParams();
@@ -10,6 +13,11 @@ const Detail = (props) => {
   let [num, setNum] = useState("");
   let [tab,setTab] = useState(0);
   let [fade,setFade] = useState('');
+  
+  let context1 = useSelector((state)=>{
+    return state
+  });
+  let dispatch = useDispatch();
 
   useEffect(() => {
     //어려운연산
@@ -29,7 +37,7 @@ const Detail = (props) => {
       alert("숫자가아닙니다.");
       document.querySelector(".count-btn").value = "";
 
-      console.log("숫자가아닙니다");
+     
     }
   }, [num]);
 
@@ -85,7 +93,7 @@ const Detail = (props) => {
                 className="count-btn"
               />
             </InputGroup>
-            <button className="btn btn-danger">주문하기</button>
+            <button className="btn btn-danger" onClick={()=>{dispatch(gocart(props.shoes[finding.id]))}}>주문하기</button>
           </div>
         </div>
         <Navbar setTab={setTab}></Navbar>
