@@ -1,6 +1,7 @@
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser,setAge, plusNum} from "../redux/store";
+import { useEffect } from 'react';
 
 const Cart = () => {
   let context1 = useSelector((state) => {
@@ -12,6 +13,8 @@ const Cart = () => {
     num = Number(a);
     console.log(typeof num);
   }
+
+  
   
   return (
     <div className="cart-container">

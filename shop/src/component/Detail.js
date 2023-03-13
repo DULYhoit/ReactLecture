@@ -1,21 +1,24 @@
 import { useContext, useEffect, useState } from "react";
-import { InputGroup, Form, Button, Nav, } from "react-bootstrap";
+import { InputGroup, Form, Button, Nav } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import Navbar from "../component/Navbar"
+import Navbar from "../component/Navbar";
 import Tabcontent from "./Tabcontent";
 import { useDispatch, useSelector } from "react-redux";
-import { setUser,setAge} from "../redux/store";
+import { setUser, setAge } from "../redux/store";
 import { gocart } from "../redux/store";
+import { getValue } from "@testing-library/user-event/dist/utils";
+import Viewrecent from "./Viewrecent";
 
 const Detail = (props) => {
   let { id } = useParams();
   let [alertdiscount, setAlertdiscount] = useState(true);
   let [num, setNum] = useState("");
-  let [tab,setTab] = useState(0);
-  let [fade,setFade] = useState('');
-  
-  let context1 = useSelector((state)=>{
-    return state
+  let [tab, setTab] = useState(0);
+  let [fade, setFade] = useState("");
+  let [viewnum,setViewnum] = useState([]);
+
+  let context1 = useSelector((state) => {
+    return state;
   });
   let dispatch = useDispatch();
 
@@ -36,25 +39,36 @@ const Detail = (props) => {
     if (isNaN(num) == true) {
       alert("숫자가아닙니다.");
       document.querySelector(".count-btn").value = "";
-
-     
     }
   }, [num]);
 
-  useEffect(()=>{
+  useEffect(() => {
     //리엑트 18버전 이후에 추가된 automatic batching 기능
     //스테이트 변경한 함수들이 근처에있으면 하나로 합쳐서 한번만 바꿔줌
     //스테이트 변경이 마지막으로 끝나면 재렌더링
     //결론은 return이 먼저실행되고 setFade('end')가 실행
     setTimeout(() => {
-      setFade('end');
+      setFade("end");
     }, 10);
-    
-    return()=>{
-      setFade(''); 
-    }
 
-  },[tab])
+    return () => {
+      setFade("");
+    };
+  }, [tab]);
+  useEffect(() => {
+    //접속시 원래있던 로컬값 가져옴 ->
+    let set = new Set();
+
+    let item = JSON.parse(localStorage.getItem("watched"));
+    set.add(Number(id));
+    for (let i = 0; i < item.length; i++) {
+      set.add(item[i]);
+    }
+    localStorage.setItem("watched", JSON.stringify([...set]));
+    setViewnum(JSON.parse(localStorage.getItem('watched')))
+
+   
+  }, []);
 
   if (id != props.shoes.length) {
     var finding = props.shoes.find(function (x) {
@@ -70,6 +84,8 @@ const Detail = (props) => {
         {alertdiscount == true ? (
           <div className="alert alert-warning">5초이내 구매시 할인</div>
         ) : null}
+
+        <Viewrecent shoes={props.shoes} viewnum={viewnum}/>
         <div className="row">
           <div className="col-md-6">
             <img src={url} width="100%" />
@@ -81,7 +97,7 @@ const Detail = (props) => {
             <p>{props.shoes[finding.id].price}원</p>
             <InputGroup
               className="mb-3 buy-count"
-              style={{ width: "300px", margin: "0 auto" }}
+              style={{ width: "200px", margin: "0 auto" }}
             >
               <Form.Control
                 placeholder="수량"
@@ -93,9 +109,17 @@ const Detail = (props) => {
                 className="count-btn"
               />
             </InputGroup>
-            <button className="btn btn-danger" onClick={()=>{dispatch(gocart(props.shoes[finding.id]))}}>주문하기</button>
+            <button
+              className="btn btn-danger"
+              onClick={() => {
+                dispatch(gocart(props.shoes[finding.id]));
+              }}
+            >
+              주문하기
+            </button>
           </div>
         </div>
+
         <Navbar setTab={setTab}></Navbar>
         <Tabcontent tab={tab} fade={fade}></Tabcontent>
       </div>

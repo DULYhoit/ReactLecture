@@ -38,6 +38,7 @@ let cart = createSlice({
         prams[checking].count +=1;
       }else{
         prams.push(item.payload)
+        
       }
     },
     plusNum(prams, item) {

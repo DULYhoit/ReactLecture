@@ -3,7 +3,7 @@ import Nav from "react-bootstrap/Nav";
 function Navbar(props) {
   return (
     <>
-      <Nav variant="tabs" defaultActiveKey="link-0">
+      <Nav variant="tabs" defaultActiveKey="link-0" style={{height : '3000px'}}>
         <Nav.Item>
           <Nav.Link eventKey="link-0" onClick={()=>{props.setTab(0)}}>버튼1</Nav.Link>
         </Nav.Item>

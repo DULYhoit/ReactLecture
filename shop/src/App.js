@@ -10,12 +10,21 @@ import Event from "./component/Event";
 import axios from "axios";
 import Cart from "./component/Cart";
 
+
 function App() {
   let [shoes, setShoes] = useState(data);
   let navigate = useNavigate();
   let [btncount, setBtncount] = useState(2);
   let [btnsetup, setBtnsetup] = useState(true);
   let [viewloading, setViewloading] = useState(false);
+
+  useEffect(()=>{
+    if(localStorage.getItem('watched') == null){
+      localStorage.setItem('watched',JSON.stringify([]))
+    }
+
+    
+  },[])
   
 
   return (
@@ -60,7 +69,7 @@ function App() {
 
               <div className="container">
                 <div className="row">
-                  <Item items={shoes} />
+                  <Item items={shoes}/>
                 </div>
               </div>
               {viewloading == true ? <h4>로딩중.....</h4> : null}

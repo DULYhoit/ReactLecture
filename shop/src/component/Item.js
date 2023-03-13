@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
+import { useState } from 'react';
 
 const Item = (props) => {
-    
+  
   return props.items.map((data,index) => (
     <div className="col-md-4">
       <Link to={`/detail/${index}`}>
